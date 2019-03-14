@@ -9,16 +9,20 @@ const PUB_VENDOR_LOCATION = '/.well-known/pubvendors.json';
  * Fetch the pubvendors.json from the local domain
  */
 function fetchPubVendorList() {
+	if (!config.loadPubvendors) {
+		return Promise.resolve({});
+	}
+
 	return fetch(PUB_VENDOR_LOCATION)
 		.then(res => res.json())
-		.catch(() => {});
+		.catch(() => { });
 }
 
 /**
  * Fetch the global vendor list if the location is configured
  */
 function fetchGlobalVendorList() {
-	const {globalVendorListLocation} = config;
+	const { globalVendorListLocation } = config;
 
 	return (globalVendorListLocation ?
 		fetch(globalVendorListLocation) :

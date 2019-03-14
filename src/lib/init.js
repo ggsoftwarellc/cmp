@@ -11,7 +11,7 @@ import config from './config';
 const CMP_VERSION = 1;
 
 // CMP_ID is the ID of your consent management provider according to the IAB. Get an ID here: https://advertisingconsent.eu/cmps/
-const CMP_ID = 0;
+const CMP_ID = 242;
 
 // The cookie specification version, as determined by the IAB. Current is 1.
 const COOKIE_VERSION = 1;
@@ -27,10 +27,10 @@ export function init(configUpdates) {
 		fetchPubVendorList()
 	])
 		.then(([vendorConsentData, pubVendorsList]) => {
-			const {vendors} = pubVendorsList || {};
+			const { vendors } = pubVendorsList || {};
 
 			// Check config for allowedVendorIds then the pubVendorList
-			const {allowedVendorIds: configVendorIds} = config;
+			const { allowedVendorIds: configVendorIds } = config;
 			const allowedVendorIds = configVendorIds instanceof Array && configVendorIds.length ? configVendorIds :
 				vendors && vendors.map(vendor => vendor.id);
 
@@ -46,7 +46,7 @@ export function init(configUpdates) {
 			});
 
 			// Pull queued command from __cmp stub
-			const {commandQueue = []} = window[CMP_GLOBAL_NAME] || {};
+			const { commandQueue = [] } = window[CMP_GLOBAL_NAME] || {};
 
 			// Replace the __cmp with our implementation
 			const cmp = new Cmp(store);

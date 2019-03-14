@@ -15,7 +15,8 @@ const defaultConfig = {
 	gdprApplies: true,
 	gdprAppliesGlobally: false,
 	allowedVendorIds: null,
-	theme: {}
+	theme: {},
+	loadPubvendors: false,
 };
 
 class Config {
