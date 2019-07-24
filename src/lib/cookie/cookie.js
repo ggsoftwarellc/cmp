@@ -11,6 +11,7 @@ import {
 import { sendPortalCommand } from '../portal';
 import pack from '../../../package.json';
 import config from '../config';
+import { CMP_ID } from 'init';
 
 const PUBLISHER_CONSENT_COOKIE_NAME = 'pubconsent';
 const PUBLISHER_CONSENT_COOKIE_MAX_AGE = 33696000;
@@ -197,8 +198,12 @@ function readCookie(name) {
 	const value = `; ${document.cookie}`;
 	const parts = value.split(`; ${name}=`);
 
-	if (parts.length === 2) {
-		return parts.pop().split(';').shift();
+	while (parts.length > 1) {
+		const candidate = parts.pop().split(';').shift();
+		const decoded = decodePublisherCookieValue(candidate);
+		if (decoded.cmpId === CMP_ID) {
+			return candidate;
+		}
 	}
 }
 
