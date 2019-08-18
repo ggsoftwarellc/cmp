@@ -62,6 +62,7 @@ export default class Store {
 		this.allowedVendorIds = new Set(allowedVendorIds);
 		this.isConsentToolShowing = false;
 		this.isBannerShowing = false;
+		this.isMiniButtonShowing = false;
 
 		this.updateVendorList(vendorList);
 		this.updateCustomPurposeList(customPurposeList);
@@ -335,6 +336,12 @@ export default class Store {
 
 	toggleModalShowing = (isShown) => {
 		this.isModalShowing = typeof isShown === 'boolean' ? isShown : !this.isModalShowing;
+
+		if (this.isModalShowing) {
+			this.isMiniButtonShowing = false;
+			this.isFooterShowing = false;
+		}
+
 		this.storeUpdate();
 	};
 
@@ -343,6 +350,11 @@ export default class Store {
 		this.isModalShowing = false;
 		this.storeUpdate();
 	};
+
+	toggleMiniButtonShowing = (isShown) => {
+		this.isMiniButtonShowing = typeof isShown === 'boolean' ? isShown : !this.isMiniButtonShowing;
+		this.storeUpdate();
+	}
 
 	updateVendorList = vendorList => {
 

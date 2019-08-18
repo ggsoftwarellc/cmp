@@ -3,6 +3,7 @@ import style from './app.less';
 import { SECTION_PURPOSES, SECTION_VENDORS } from './popup/details/details';
 import Popup from './popup/popup';
 import Banner from './banner/banner';
+import MiniButton from './minibutton/minibutton';
 
 export default class App extends Component {
 	static defaultProps = {
@@ -20,11 +21,13 @@ export default class App extends Component {
 		store.persist();
 		notify('onSubmit');
 		store.toggleConsentToolShowing(false);
+		store.toggleMiniButtonShowing(true);
 	};
-
 
 	onChangeDetailsPanel = panelIndex => {
 		this.props.store.toggleModalShowing(true);
+		this.props.store.toggleMiniButtonShowing(false);
+
 		this.setState({
 			selectedDetailsPanelIndex: Math.max(0, panelIndex)
 		});
@@ -53,6 +56,8 @@ export default class App extends Component {
 		});
 
 		store.toggleModalShowing(true);
+		store.toggleMiniButtonShowing(false);
+
 		this.setState({
 			selectedPurposeDetails: purposeItem,
 			selectedDetailsPanelIndex: SECTION_VENDORS
@@ -82,6 +87,7 @@ export default class App extends Component {
 		const {
 			isModalShowing,
 			isBannerShowing,
+			isMiniButtonShowing,
 			toggleModalShowing,
 			vendorList = {},
 		} = store;
@@ -90,6 +96,10 @@ export default class App extends Component {
 
 		return (
 			<div class={style.gdpr}>
+				<MiniButton isShowing={isMiniButtonShowing}
+					onClick={toggleModalShowing}
+					theme={theme}
+				/>
 				<Banner isShowing={isBannerShowing}
 					isModalShowing={isModalShowing}
 					onSave={this.onSave}

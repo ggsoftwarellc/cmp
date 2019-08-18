@@ -6,8 +6,9 @@ import CloseButton from '../closebutton/closebutton';
 export default class Popup extends Component {
 
 	handleClose = () => {
-		const {store} = this.props;
-		store.toggleModalShowing(false)
+		const { store } = this.props;
+		store.toggleModalShowing(false);
+		store.toggleMiniButtonShowing(true);
 	};
 
 	render(props, state) {
@@ -20,17 +21,17 @@ export default class Popup extends Component {
 			selectedDetailsPanelIndex,
 			selectedPurposeDetails,
 		} = props;
-		const {overlayBackground, secondaryColor, backgroundColor} = theme;
-		const {isModalShowing, vendorConsentData} = store;
+		const { overlayBackground, secondaryColor, backgroundColor } = theme;
+		const { isModalShowing, vendorConsentData } = store;
 
 		return (
 			<div
 				class={style.popup}
-				style={{display: isModalShowing ? 'flex' : 'none'}}
+				style={{ display: isModalShowing ? 'flex' : 'none' }}
 			>
 				<div
 					class={style.overlay}
-					style={{background: overlayBackground}}
+					style={{ background: overlayBackground }}
 					onClick={this.handleClose}
 				/>
 				{isModalShowing ?

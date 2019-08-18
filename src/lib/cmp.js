@@ -25,7 +25,7 @@ export default class Cmp {
 		/**
 		 * Get all publisher consent data from the data store.
 		 */
-		getPublisherConsents: (purposeIds, callback = () => {}) => {
+		getPublisherConsents: (purposeIds, callback = () => { }) => {
 			const {
 				persistedPublisherConsentData,
 				persistedVendorConsentData,
@@ -36,16 +36,16 @@ export default class Cmp {
 				...persistedPublisherConsentData,
 				...persistedVendorConsentData,
 			}, [
-				'cookieVersion',
-				'created',
-				'lastUpdated',
-				'cmpId',
-				'cmpVersion',
-				'consentScreen',
-				'consentLanguage',
-				'vendorListVersion',
-				'publisherPurposeVersion'
-			]);
+					'cookieVersion',
+					'created',
+					'lastUpdated',
+					'cmpId',
+					'cmpVersion',
+					'consentScreen',
+					'consentLanguage',
+					'vendorListVersion',
+					'publisherPurposeVersion'
+				]);
 
 			const consent = {
 				metadata,
@@ -60,7 +60,7 @@ export default class Cmp {
 		 * Get all vendor consent data from the data store.
 		 * @param {Array} vendorIds Array of vendor IDs to retrieve.  If empty return all vendors.
 		 */
-		getVendorConsents: (vendorIds, callback = () => {}) => {
+		getVendorConsents: (vendorIds, callback = () => { }) => {
 
 			// Encode limited fields for "metadata"
 			const { persistedVendorConsentData } = this.store;
@@ -88,7 +88,7 @@ export default class Cmp {
 		/**
 		 * Get the encoded vendor consent data value.
 		 */
-		getConsentData: (_, callback = () => {}) => {
+		getConsentData: (_, callback = () => { }) => {
 			const consentData = {
 				gdprApplies: config.gdprApplies,
 				hasGlobalScope: config.storeConsentGlobally,
@@ -100,7 +100,7 @@ export default class Cmp {
 		/**
 		 * Get the entire vendor list
 		 */
-		getVendorList: (vendorListVersion, callback = () => {}) => {
+		getVendorList: (vendorListVersion, callback = () => { }) => {
 			const { vendorList } = this.store;
 			const { vendorListVersion: listVersion } = vendorList || {};
 			if (!vendorListVersion || vendorListVersion === listVersion) {
@@ -111,7 +111,7 @@ export default class Cmp {
 			}
 		},
 
-		ping: (_, callback = () => {}) => {
+		ping: (_, callback = () => { }) => {
 			const result = {
 				gdprAppliesGlobally: config.gdprAppliesGlobally,
 				cmpLoaded: true
@@ -162,9 +162,17 @@ export default class Cmp {
 		},
 
 		/**
+		 * Trigger the consent tool mini button to be shown
+		 */
+		showMiniButton: (_, callback = () => { }) => {
+			this.store.toggleMiniButtonShowing(true);
+			callback(true);
+		},
+
+		/**
 		 * Trigger the consent tool banner to be shown
 		 */
-		showConsentTool: (_, callback = () => {}) => {
+		showConsentTool: (_, callback = () => { }) => {
 			this.store.toggleConsentToolShowing(true);
 			callback(true);
 		},
@@ -172,7 +180,7 @@ export default class Cmp {
 		/**
 		 * Trigger the consent tool modal to be shown
 		 */
-		showModal: (_, callback = () => {}) => {
+		showModal: (_, callback = () => { }) => {
 			this.store.toggleModalShowing(true);
 			callback(true);
 		}

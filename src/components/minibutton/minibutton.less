@@ -1,0 +1,42 @@
+@import '../../style/variables.less';
+
+.miniButton {
+	position: fixed;
+	right: 5%;
+	bottom: 0;
+	z-index: 99998;
+	font-size: 14px;
+	max-height: 100%;
+    transition: bottom 0.5s ease-in-out, opacity 0.5s linear;
+    
+    @media @smartphone {
+		margin-top: -80px;
+		padding: 15px 20px;
+		overflow: auto;
+    }
+    
+    a {
+        display: block;
+        background: @color-primary;
+        color: #fff;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 8px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        font-size: 12px;
+        font-weight: 500;
+        opacity: 0.8;
+
+        &:hover {
+            color: #fff;
+            opacity: 1;
+        }
+    }
+
+	&.hidden {
+		pointer-events: none;
+		bottom: -250px;
+		opacity: 0;
+	}
+}
