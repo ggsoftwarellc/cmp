@@ -10,7 +10,7 @@ function copyData(dataObject) {
 	if (typeof dataObject !== 'object') {
 		return dataObject;
 	}
-	const copy = {...dataObject};
+	const copy = { ...dataObject };
 	for (let key in copy) {
 		if (copy.hasOwnProperty(key) && copy[key] instanceof Set) {
 			copy[key] = new Set(copy[key]);
@@ -99,7 +99,7 @@ export default class Store {
 			selectedPurposeIds = new Set()
 		} = persistedVendorConsentData;
 
-		const {purposes = [], vendors = []} = vendorList;
+		const { purposes = [], vendors = [], features = [] } = vendorList;
 
 		// Map requested vendorIds
 		const vendorMap = {};
@@ -110,7 +110,7 @@ export default class Store {
 			// In case the vendor list has not been loaded yet find the highest
 			// vendor ID to map any consent data we already have
 			const lastVendorId = Math.max(maxVendorId,
-				...vendors.map(({id}) => id),
+				...vendors.map(({ id }) => id),
 				...Array.from(selectedVendorIds));
 
 			// Map all IDs up to the highest vendor ID found
@@ -121,7 +121,7 @@ export default class Store {
 
 		// Map all purpose IDs
 		const lastPurposeId = Math.max(
-			...purposes.map(({id}) => id),
+			...purposes.map(({ id }) => id),
 			...Array.from(selectedPurposeIds));
 
 		const purposeMap = {};
@@ -168,16 +168,16 @@ export default class Store {
 			selectedCustomPurposeIds = new Set()
 		} = persistedPublisherConsentData;
 
-		const {selectedPurposeIds = new Set()} = persistedVendorConsentData;
-		const {purposes = []} = vendorList;
-		const {purposes: customPurposes = []} = customPurposeList;
+		const { selectedPurposeIds = new Set() } = persistedVendorConsentData;
+		const { purposes = [], features = [] } = vendorList;
+		const { purposes: customPurposes = [] } = customPurposeList;
 
 		const lastStandardPurposeId = Math.max(
-			...purposes.map(({id}) => id),
+			...purposes.map(({ id }) => id),
 			...Array.from(selectedPurposeIds));
 
 		const lastCustomPurposeId = Math.max(
-			...customPurposes.map(({id}) => id),
+			...customPurposes.map(({ id }) => id),
 			...Array.from(selectedPurposeIds));
 
 		// Map all purpose IDs
@@ -232,7 +232,7 @@ export default class Store {
 		publisherConsentData.lastUpdated = now;
 
 		// Write vendor cookie to appropriate domain
-		writeVendorConsentCookie({...vendorConsentData, vendorList});
+		writeVendorConsentCookie({ ...vendorConsentData, vendorList });
 
 		// Write publisher cookie if enabled
 		if (config.storePublisherData) {
@@ -267,7 +267,7 @@ export default class Store {
 	};
 
 	selectVendor = (vendorId, isSelected) => {
-		const {selectedVendorIds} = this.vendorConsentData;
+		const { selectedVendorIds } = this.vendorConsentData;
 		if (isSelected) {
 			selectedVendorIds.add(vendorId);
 		}
@@ -278,9 +278,9 @@ export default class Store {
 	};
 
 	selectAllVendors = (isSelected, purposeId) => {
-		const {vendors = []} = this.vendorList || {};
+		const { vendors = [] } = this.vendorList || {};
 		const operation = isSelected ? 'add' : 'delete';
-		vendors.forEach(({id, purposeIds = []}) => {
+		vendors.forEach(({ id, purposeIds = [] }) => {
 			// If a purposeId is supplied only toggle vendors that support that purpose
 			if (typeof purposeId !== 'number' ||
 				purposeIds.indexOf(purposeId) > -1) {
@@ -291,7 +291,7 @@ export default class Store {
 	};
 
 	selectPurpose = (purposeId, isSelected) => {
-		const {selectedPurposeIds} = this.vendorConsentData;
+		const { selectedPurposeIds } = this.vendorConsentData;
 		if (isSelected) {
 			selectedPurposeIds.add(purposeId);
 		}
@@ -302,14 +302,14 @@ export default class Store {
 	};
 
 	selectAllPurposes = (isSelected) => {
-		const {purposes = []} = this.vendorList || {};
+		const { purposes = [] } = this.vendorList || {};
 		const operation = isSelected ? 'add' : 'delete';
-		purposes.forEach(({id}) => this.vendorConsentData.selectedPurposeIds[operation](id));
+		purposes.forEach(({ id }) => this.vendorConsentData.selectedPurposeIds[operation](id));
 		this.storeUpdate();
 	};
 
 	selectCustomPurpose = (purposeId, isSelected) => {
-		const {selectedCustomPurposeIds} = this.publisherConsentData;
+		const { selectedCustomPurposeIds } = this.publisherConsentData;
 		if (isSelected) {
 			selectedCustomPurposeIds.add(purposeId);
 		}
@@ -320,9 +320,9 @@ export default class Store {
 	};
 
 	selectAllCustomPurposes = (isSelected) => {
-		const {purposes = []} = this.customPurposeList || {};
+		const { purposes = [] } = this.customPurposeList || {};
 		const operation = isSelected ? 'add' : 'delete';
-		purposes.forEach(({id}) => this.publisherConsentData.selectedCustomPurposeIds[operation](id));
+		purposes.forEach(({ id }) => this.publisherConsentData.selectedCustomPurposeIds[operation](id));
 		this.storeUpdate();
 	};
 
@@ -357,12 +357,13 @@ export default class Store {
 
 		// Filter vendors in vendorList by allowedVendorIds
 		if (vendorList && vendorList.vendors && allowedVendorIds.size) {
-			vendorList.vendors = vendorList.vendors.filter(({id}) => allowedVendorIds.has(id));
+			vendorList.vendors = vendorList.vendors.filter(({ id }) => allowedVendorIds.has(id));
 		}
 
 		const {
 			vendors = [],
 			purposes = [],
+			features = [],
 		} = vendorList || {};
 
 		// If vendor consent data has never been persisted set default selected status
@@ -371,26 +372,26 @@ export default class Store {
 			this.vendorConsentData.selectedVendorIds = new Set(vendors.map(v => v.id));
 		}
 
-		const {selectedVendorIds = new Set()} = this.vendorConsentData;
+		const { selectedVendorIds = new Set() } = this.vendorConsentData;
 
 		// Find the maxVendorId out of the vendor list and selectedVendorIds
 		this.vendorConsentData.maxVendorId = Math.max(maxVendorId,
-			...vendors.map(({id}) => id),
+			...vendors.map(({ id }) => id),
 			...Array.from(selectedVendorIds));
 		this.vendorList = vendorList;
 		this.storeUpdate();
 	};
 
 	updateCustomPurposeList = customPurposeList => {
-		const {created} = this.publisherConsentData;
+		const { created } = this.publisherConsentData;
 
 		// If publisher consent has never been persisted set the default selected status
 		if (!created) {
-			const {purposes = [],} = customPurposeList || {};
+			const { purposes = [], } = customPurposeList || {};
 			this.publisherConsentData.selectedCustomPurposeIds = new Set(purposes.map(p => p.id));
 		}
 
-		const {version = 1} = customPurposeList || {};
+		const { version = 1 } = customPurposeList || {};
 		this.publisherConsentData.publisherPurposeVersion = version;
 
 		this.customPurposeList = customPurposeList;

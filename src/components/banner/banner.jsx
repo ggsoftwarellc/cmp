@@ -59,7 +59,7 @@ export default class Banner extends Component {
 	};
 
 	render(props, state) {
-		const { isShowing, onSave, theme, purposes } = props;
+		const { isShowing, onSave, theme, purposes, features } = props;
 		const { selectedPanelIndex, isExpanded } = state;
 		const {
 			primaryColor,
@@ -86,12 +86,11 @@ export default class Banner extends Component {
 						ref={el => this.messageRef = el}
 					>
 						<div class={style.info}>
-							<div class={style.title} style={{ color: textColor }}>
-								<LocalLabel localizeKey='title'>Ads help us run this site</LocalLabel>
-							</div>
 							<LocalLabel localizeKey='description'>
-								When you visit our site, <a onClick={this.handleVendorListClick}>pre-selected companies</a> may access and use certain
+								When you visit our site, <a onClick={this.handleVendorListClick}>third party partners</a> may access and use certain
 								information on your device and about this site to serve relevant ads or personalized content.
+
+								<strong>It is your right to update or withdraw your consent at any time. Once dismissed, this box can be restored by clicking the "Cookies" button in the bottom right corner.</strong>
 							</LocalLabel>
 							<div class={style.options}>
 								<div
@@ -100,7 +99,7 @@ export default class Banner extends Component {
 										onClick={this.handleInfo(PANEL_COLLECTED)}
 										class={style.detailExpand}
 									>
-										<ChevronIcon color={textLinkColor}/>
+										<ChevronIcon color={textLinkColor} />
 										<LocalLabel localizeKey='links.data.title'>Information that may be
 											used
 										</LocalLabel>
@@ -147,7 +146,7 @@ export default class Banner extends Component {
 										<ul>
 											{purposes.map((purposeItem, index) => (
 												<li class={style.purposeItem}>
-													<a class={style.learnMore} onClick={this.handlePurposeItemClick(purposeItem)} style={{color: textLinkColor}}>
+													<a class={style.learnMore} onClick={this.handlePurposeItemClick(purposeItem)} style={{ color: textLinkColor }}>
 														<PurposesLabel localizeKey={`purpose${purposeItem.id}.menu`}>{purposeItem.name}</PurposesLabel>
 													</a>
 												</li>
@@ -158,21 +157,23 @@ export default class Banner extends Component {
 							</div>
 						</div>
 						<div class={style.consent}>
-							<a class={style.learnMore} onClick={this.handleLearnMore}
-							   style={{ color: primaryColor, borderColor: primaryColor }}>
-								<LocalLabel localizeKey='links.manage'>Manage Your Choices</LocalLabel>
-							</a>
-							<a
-								class={style.continue}
-								onClick={onSave}
-								style={{
-									backgroundColor: primaryColor,
-									borderColor: primaryColor,
-									color: primaryTextColor
-								}}
-							>
-								<LocalLabel localizeKey='links.accept'>Continue to site</LocalLabel>
-							</a>
+							<div>
+								<a class={style.learnMore} onClick={this.handleLearnMore}
+									style={{ color: primaryColor, borderColor: primaryColor }}>
+									<LocalLabel localizeKey='links.manage'>Manage Your Choices</LocalLabel>
+								</a>
+								<a
+									class={style.continue}
+									onClick={onSave}
+									style={{
+										backgroundColor: primaryColor,
+										borderColor: primaryColor,
+										color: primaryTextColor
+									}}
+								>
+									<LocalLabel localizeKey='links.accept'>Continue to site</LocalLabel>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

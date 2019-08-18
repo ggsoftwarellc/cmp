@@ -86,27 +86,28 @@ export default class App extends Component {
 			vendorList = {},
 		} = store;
 
-		const { purposes = [] } = vendorList;
+		const { purposes = [], features = [] } = vendorList;
 
 		return (
 			<div class={style.gdpr}>
 				<Banner isShowing={isBannerShowing}
-						isModalShowing={isModalShowing}
-						onSave={this.onSave}
-						onShowModal={toggleModalShowing}
-						onSelectPurpose={this.onSelectPurpose}
-						onChangeDetailsPanel={this.onChangeDetailsPanel}
-						theme={theme}
-						purposes={purposes}
-						selectedPurposeDetails={selectedPurposeDetails}
+					isModalShowing={isModalShowing}
+					onSave={this.onSave}
+					onShowModal={toggleModalShowing}
+					onSelectPurpose={this.onSelectPurpose}
+					onChangeDetailsPanel={this.onChangeDetailsPanel}
+					theme={theme}
+					purposes={purposes}
+					features={features}
+					selectedPurposeDetails={selectedPurposeDetails}
 				/>
 				<Popup store={store}
-					   onSave={this.onSave}
-					   onChangeDetailsPanel={this.onChangeDetailsPanel}
-					   onSelectPurpose={this.onSelectPurpose}
-					   selectedDetailsPanelIndex={selectedDetailsPanelIndex}
-					   theme={theme}
-					   selectedPurposeDetails={selectedPurposeDetails}
+					onSave={this.onSave}
+					onChangeDetailsPanel={this.onChangeDetailsPanel}
+					onSelectPurpose={this.onSelectPurpose}
+					selectedDetailsPanelIndex={selectedDetailsPanelIndex}
+					theme={theme}
+					selectedPurposeDetails={selectedPurposeDetails}
 				/>
 			</div>
 		);

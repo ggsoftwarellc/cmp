@@ -61,6 +61,11 @@ div.vendors {
 		align-items: center;
 		font-size: 14px;
 
+		a {
+			margin-left: 5px;
+			font-size: 12px;
+		}
+
 		svg {
 			vertical-align: middle;
  		}
@@ -99,6 +104,8 @@ div.vendors {
 			td, th {
 				padding: 5px;
 				font-size: 12px;
+				vertical-align: top;
+
 				&:first-child {
 					width: 100%;
 					text-align: left;
@@ -125,5 +132,30 @@ div.vendors {
 	.policy {
 		margin: 0 5px;
 		fill: @color-primary;
+	}
+
+	.vendorInfo {
+		h3 {
+			font-size: 16px;
+			margin: 15px 0 5px 0;
+			font-weight: 500;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0 0 0 35px;
+
+			li {
+				font-size: 14px;
+				line-height: 18px;
+				margin-bottom: 10px;
+				font-weight: 300;
+
+				strong {
+					display: block;
+					font-weight: 500;
+				}
+			}
+		}
 	}
 }

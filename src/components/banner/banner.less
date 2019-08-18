@@ -9,12 +9,13 @@
 
 	color: @color-textLight;
 	background: white;
-	font-size: 16px;
+	font-size: 14px;
 	max-height: 100%;
 	transition: bottom 0.5s ease-in-out, opacity 0.5s linear;
 
-	box-shadow: 0px 0px 5px @color-primary;
-	padding: 15px 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.18);
+	border-top: 1px solid @color-primary;
+    padding: 20px 30px;
 
 	@media @smartphone {
 		margin-top: -80px;
@@ -42,6 +43,12 @@
 
 				@media @smartphone {
 					font-size: 12px;
+				}
+
+				strong {
+					display: block;
+					margin: 10px 0 0 0;
+					font-weight: 500;
 				}
 
 				.title {
@@ -111,46 +118,69 @@
 						}
 					}
 				}
+
+				.withdraw {
+					margin-top: 15px;
+				}
 			}
 
 			.consent {
 				display: flex;
+				align-items: center;
+				justify-content: center;
 				flex: 0;
 				white-space: nowrap;
 				margin-left: 30px;
+				text-align: center;
 
 				@media @smartphone {
 					margin-left: 0;
 				}
 
-				a {
+				> div {
+					
+				display: flex;
+				}
+
+				a.continue, a.learnMore {
+					flex: 1;
 					display: block;
 					position: relative;
-					margin-top: 30px;
 					line-height: 48px;
 					height: 48px;
 					text-align: center;
 					width: 100%;
 					border: 1px solid @color-primary;
+					background: @color-primary;
+					color: #fff;
 					padding: 0 15px;
 					flex: 1 0 40%;
 
 					@media @smartphone {
 						top: auto;
 						margin: 0;
-						line-height: 38px;
-						font-size: 14px;
+						line-height: 36px;
+						font-size: 12px;
 						height: 38px;
 					}
+				}
 
-					&.learnMore {
-						color: @color-primary;
-					}
+				a.learnMore {
+					flex: 1;
+					display: block;
+					font-size: 14px;
+					font-weight: 500;
+					border: 1px solid @color-primary;
+					background: none;
+					color:  @color-primary;
+					margin-right: 15px;
 
-					&.continue {
-						margin-left: 10px;
-						background: @color-primary;
-						color: #fff;
+					@media @smartphone {
+						top: auto;
+						margin: 0 10px 0 0;
+						line-height: 36px;
+						font-size: 12px;
+						height: 38px;
 					}
 				}
 			}

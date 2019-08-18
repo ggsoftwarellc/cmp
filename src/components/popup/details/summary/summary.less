@@ -1,18 +1,32 @@
 @import '../../../../style/variables';
 
 .summary {
-
 	.purposeItems {
-		padding-bottom: 20px;
+		border: 1px solid @color-border;
+		padding: 15px;
+		margin-top: 10px;
+		margin-bottom: 20px;
 	}
+
+	.allowSwitch {
+		display: block;
+		float: right;
+		font-size: 12px;
+		line-height: 28px;
+	}
+
 	.purposeItem {
-		display: flex;
-		border-top: 1px solid @color-border;
+		border-bottom: 1px solid @color-border;
 		padding: 8px 0;
 		color: @color-textLight;
 
+		&:first-child {
+			padding-top: 0;
+		}
+		
 		&:last-child {
-			border-bottom: 1px solid @color-border;
+			border: none;
+			padding-bottom: 0;
 		}
 
 		@media @smartphone {
@@ -23,19 +37,31 @@
 	}
 
 	.learnMore {
-		font-size: 14px;
+		font-size: 12px;
+		font-weight: 400;
+		
 		@media @smartphone {
 			font-size: 12px;
 		}
 	}
 
 	.purposeTitle {
-		flex: 1;
-		font-size: 18px;
+		font-size: 14px;
+		color: @color-text;
+		font-weight: 400;
+		display: block;
+		margin-bottom: 10px;
+
 		@media @smartphone {
 			font-size: 14px;
 			display: block;
-			margin-bottom: 0;
 		}
+	}
+
+	.purposeDescription {
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 20px;
+		display: block;
 	}
 }

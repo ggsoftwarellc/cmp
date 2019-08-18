@@ -73,7 +73,7 @@ export default class Details extends Component {
 		} = store;
 		const { selectedPurposeIds, selectedVendorIds } = vendorConsentData;
 		const { selectedCustomPurposeIds } = publisherConsentData;
-		const { purposes = [], vendors = [] } = vendorList;
+		const { purposes = [], vendors = [], features = [], } = vendorList;
 		const { purposes: customPurposes = [] } = customPurposeList;
 
 		const formattedVendors = vendors
@@ -92,6 +92,11 @@ export default class Details extends Component {
 					<Panel selectedIndex={selectedPanelIndex}>
 						<Summary
 							purposes={purposes}
+							features={features}
+							vendors={formattedVendors}
+							selectAllVendors={selectAllVendors}
+							selectedVendorIds={selectedVendorIds}
+							selectedPurposeDetails={selectedPurposeDetails}
 							onPurposeClick={this.handlePurposeClick}
 							onVendorListClick={this.handlePanelClick(SECTION_VENDOR_LIST)}
 							onPurposeListClick={this.handlePanelClick(SECTION_PURPOSE_LIST)}
@@ -99,6 +104,8 @@ export default class Details extends Component {
 						/>
 						<VendorList
 							vendors={formattedVendors}
+							purposes={purposes}
+							features={features}
 							onBack={this.handleBack}
 							theme={theme}
 						/>
@@ -109,6 +116,7 @@ export default class Details extends Component {
 						<Vendors
 							vendors={formattedVendors}
 							purposes={purposes}
+							features={features}
 							selectVendor={selectVendor}
 							selectAllVendors={selectAllVendors}
 							selectedVendorIds={selectedVendorIds}
@@ -119,12 +127,12 @@ export default class Details extends Component {
 				</div>
 				<div class={style.footer} style={{ borderColor: dividerColor }}>
 					{selectedPanelIndex > 0 &&
-					<Button
-						class={style.back}
-						onClick={this.handleBack}
-						backgroundColor={secondaryColor}
-						textColor={secondaryTextColor}
-					>&lt; <LocalLabel localizeKey='back'>Back</LocalLabel></Button>
+						<Button
+							class={style.back}
+							onClick={this.handleBack}
+							backgroundColor={secondaryColor}
+							textColor={secondaryTextColor}
+						>&lt; <LocalLabel localizeKey='back'>Back</LocalLabel></Button>
 					}
 					<Button
 						class={style.save}
