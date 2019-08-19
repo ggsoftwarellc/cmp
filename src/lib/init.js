@@ -42,7 +42,8 @@ export function init(configUpdates) {
 				vendorConsentData,
 				publisherConsentData: readPublisherConsentCookie(),
 				pubVendorsList,
-				allowedVendorIds
+				allowedVendorIds,
+				isMiniButtonEnabled: config.miniButton
 			});
 
 			// Pull queued command from __cmp stub

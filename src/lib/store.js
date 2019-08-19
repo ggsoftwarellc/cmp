@@ -29,7 +29,8 @@ export default class Store {
 		vendorList,
 		customPurposeList,
 		pubVendorsList,
-		allowedVendorIds
+		allowedVendorIds,
+		isMiniButtonEnabled,
 	} = {}) {
 		// Keep track of data that has already been persisted
 		this.persistedVendorConsentData = copyData(vendorConsentData);
@@ -62,10 +63,12 @@ export default class Store {
 		this.allowedVendorIds = new Set(allowedVendorIds);
 		this.isConsentToolShowing = false;
 		this.isBannerShowing = false;
-		this.isMiniButtonShowing = false;
 
 		this.updateVendorList(vendorList);
 		this.updateCustomPurposeList(customPurposeList);
+
+		this.isMiniButtonShowing = false;
+		this.isMiniButtonEnabled = isMiniButtonEnabled;
 	}
 
 	/**
@@ -352,6 +355,11 @@ export default class Store {
 	};
 
 	toggleMiniButtonShowing = (isShown) => {
+		if (!this.isMiniButtonEnabled) {
+			this.isMiniButtonShowing = false;
+			return;
+		}
+
 		this.isMiniButtonShowing = typeof isShown === 'boolean' ? isShown : !this.isMiniButtonShowing;
 		this.storeUpdate();
 	}
