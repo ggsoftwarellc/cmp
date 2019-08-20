@@ -90,7 +90,7 @@ export default class Banner extends Component {
 								When you visit our site, <a onClick={this.handleVendorListClick}>third party partners</a> may access and use certain
 								information on your device and about this site to serve relevant ads or personalized content.
 
-								<strong>It is your right to update or withdraw your consent at any time. Once dismissed, this box can be restored by clicking the "Cookies" button in the bottom right corner.</strong>
+								<strong>It is your right to update or withdraw your consent at any time. Once dismissed, this box can be restored by clicking the "Cookies" button at the bottom of the site.</strong>
 							</LocalLabel>
 							<div class={style.options}>
 								<div

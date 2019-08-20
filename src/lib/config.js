@@ -17,7 +17,7 @@ const defaultConfig = {
 	allowedVendorIds: null,
 	theme: {},
 	loadPubvendors: false,
-	miniButton: true,
+	miniButton: false,
 };
 
 class Config {
