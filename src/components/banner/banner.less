@@ -38,7 +38,6 @@
 			}
 
 			.info {
-				flex: 1;
 				line-height: 16px;
 
 				@media @smartphone {
@@ -127,23 +126,22 @@
 			.consent {
 				display: flex;
 				align-items: center;
-				justify-content: center;
-				flex: 0;
-				white-space: nowrap;
+				justify-content: flex-end;
+				flex: 1 0 auto;
 				margin-left: 30px;
+				white-space: nowrap;
 				text-align: center;
 
 				@media @smartphone {
+					justify-content: center;
 					margin-left: 0;
 				}
 
 				> div {
-					
-				display: flex;
+					display: flex;
 				}
 
 				a.continue, a.learnMore {
-					flex: 1;
 					display: block;
 					position: relative;
 					line-height: 48px;
@@ -154,7 +152,7 @@
 					background: @color-primary;
 					color: #fff;
 					padding: 0 15px;
-					flex: 1 0 40%;
+					max-width: 180px;
 
 					@media @smartphone {
 						top: auto;
@@ -166,7 +164,6 @@
 				}
 
 				a.learnMore {
-					flex: 1;
 					display: block;
 					font-size: 14px;
 					font-weight: 500;
@@ -174,6 +171,7 @@
 					background: none;
 					color:  @color-primary;
 					margin-right: 15px;
+					min-width: 170px;
 
 					@media @smartphone {
 						top: auto;
